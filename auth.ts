@@ -7,6 +7,8 @@ import bcrypt from 'bcryptjs';
 import postgres from 'postgres';
 import GitHub from "next-auth/providers/github"
 
+export const runtime = "nodejs";
+
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
 async function getUser(email: string): Promise<User | undefined> {
