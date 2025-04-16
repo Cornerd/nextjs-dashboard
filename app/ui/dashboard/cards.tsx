@@ -4,6 +4,7 @@ import {
   UserGroupIcon,
   InboxIcon,
 } from '@heroicons/react/24/outline';
+import { fetchCardData } from '@/app/lib/data';
 import { lusitana } from '@/app/ui/fonts';
 
 const iconMap = {
@@ -20,13 +21,12 @@ interface CardWrapperProps {
   numberOfCustomers: number;
 }
 
-export default async function CardWrapper(props: CardWrapperProps) {
-  const { totalPaidInvoices, totalPendingInvoices, numberOfInvoices, numberOfCustomers } = props;
+export default async function CardWrapper() {
+  const { totalPaidInvoices, totalPendingInvoices, numberOfInvoices, numberOfCustomers } = await fetchCardData();
   
   return (
-    <>
+    <div className='flex justify-between'>
       {/* NOTE: Uncomment this code in Chapter 9 */}
-
       <Card title="Collected" value={totalPaidInvoices} type="collected" />
       <Card title="Pending" value={totalPendingInvoices} type="pending" />
       <Card title="Total Invoices" value={numberOfInvoices} type="invoices" />
@@ -35,7 +35,7 @@ export default async function CardWrapper(props: CardWrapperProps) {
         value={numberOfCustomers}
         type="customers"
       />
-    </>
+    </div>
   );
 }
 
